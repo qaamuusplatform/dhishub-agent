@@ -1,0 +1,262 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="row">
+    <!-- [ sample-page ] start -->
+
+
+
+    <div class="col-xl-8 col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row mb-0 align-items-center">
+                    <div class="col">
+                        <small>Agent-user</small>
+                        <h4>register new agent-user</h4>
+                    </div>
+                    <!-- <div class="col-auto">
+                        <select class="form-select p-r-35">
+                            <option>Today</option>
+                            <option selected>This Month</option>
+                            <option>This Year</option>
+                        </select>
+                    </div> -->
+                </div>
+                <hr style="padding-top: -5px;">
+                <form method="post" id="mainForm">
+                    <div class="form-group">
+                        <label for="r_package">Request Package ID</label>
+                        <select class="form-control" id="r_package" required name="r_package">
+                            {% for r_package in requests_packages %}
+                            <option value="{{r_package.id}}">{{r_package.name}} &nbsp;&nbsp;
+                                -{{r_package.requests_count}}-&nbsp;&nbsp;
+                                $<strong>{{r_package.price_per_month}}</strong></option>
+                            {% endfor %}
+                            <!-- Add more options as needed -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email address</label>
+                        <input type="email" class="form-control" required id="email" name="email"
+                            aria-describedby="emailHelp" placeholder="Enter email">
+
+                    </div>
+                    <div class="form-group">
+                        <label for="r_package">Phone Number</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">252</div>
+                            </div>
+                            <input type="number" name="number" required class="form-control" id="number"
+                                placeholder="xx  xx xx xx">
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" required id="password" name="password"
+                            placeholder="Password">
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6">
+                            <label for="company_name">Company Name</label>
+                            <input type="text" class="form-control" required id="company_name" name="company_name"
+                                placeholder="Enter company name">
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="owner_name">Owner Name</label>
+                            <input type="text" class="form-control" required id="owner_name" name="owner_name"
+                                placeholder="Enter owner name">
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
+                        <div class="col-sm-4">
+                            <label for="merchantUid">Merchant UID</label>
+                            <input type="text" class="form-control" required id="merchantUid" name="merchantUid"
+                                placeholder="Enter merchant UID">
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="apiUserId">API User ID</label>
+                            <input type="text" class="form-control" required id="apiUserId" name="apiUserId"
+                                placeholder="Enter API user ID">
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="apiKey">API Key</label>
+                            <input type="text" class="form-control" required id="apiKey" name="apiKey"
+                                placeholder="Enter API key">
+                        </div>
+                    </div>
+                    <br>
+                    <div id="submitingDiv">
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row mb-3 align-items-center">
+                    <div class="col">
+                        <h4>Popular Stocks</h4>
+                    </div>
+                    <div class="col-auto"> </div>
+                </div>
+                <div class="rounded bg-light-secondary overflow-hidden mb-3">
+                    <div class="px-3 pt-3">
+                        <div class="row mb-1 align-items-start">
+                            <div class="col">
+                                <h5 class="text-secondary mb-0">Bajaj Finery</h5>
+                                <small class="text-muted">10% Profit</small>
+                            </div>
+                            <div class="col-auto">
+                                <h4 class="mb-0">$1839.00</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="bajajchart"></div>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item px-0">
+                        <div class="row align-items-start">
+                            <div class="col">
+                                <h5 class="mb-0">Bajaj Finery</h5>
+                                <small class="text-success">10% Profit</small>
+                            </div>
+                            <div class="col-auto">
+                                <h4 class="mb-0">$1839.00<span
+                                        class="ms-2 align-top avtar avtar-xxs bg-light-success"><i
+                                            class="ti ti-chevron-up text-success"></i></span></h4>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item px-0">
+                        <div class="row align-items-start">
+                            <div class="col">
+                                <h5 class="mb-0">TTML</h5>
+                                <small class="text-danger">10% Profit</small>
+                            </div>
+                            <div class="col-auto">
+                                <h4 class="mb-0">$100.00<span class="ms-2 align-top avtar avtar-xxs bg-light-danger"><i
+                                            class="ti ti-chevron-down text-danger"></i></span></h4>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item px-0">
+                        <div class="row align-items-start">
+                            <div class="col">
+                                <h5 class="mb-0">Reliance</h5>
+                                <small class="text-success">10% Profit</small>
+                            </div>
+                            <div class="col-auto">
+                                <h4 class="mb-0">$200.00<span class="ms-2 align-top avtar avtar-xxs bg-light-success"><i
+                                            class="ti ti-chevron-up text-success"></i></span></h4>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item px-0">
+                        <div class="row align-items-start">
+                            <div class="col">
+                                <h5 class="mb-0">TTML</h5>
+                                <small class="text-danger">10% Profit</small>
+                            </div>
+                            <div class="col-auto">
+                                <h4 class="mb-0">$189.00<span class="ms-2 align-top avtar avtar-xxs bg-light-danger"><i
+                                            class="ti ti-chevron-down text-danger"></i></span></h4>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item px-0">
+                        <div class="row align-items-start">
+                            <div class="col">
+                                <h5 class="mb-0">Stolon</h5>
+                                <small class="text-danger">10% Profit</small>
+                            </div>
+                            <div class="col-auto">
+                                <h4 class="mb-0">$189.00<span class="ms-2 align-top avtar avtar-xxs bg-light-danger"><i
+                                            class="ti ti-chevron-down text-danger"></i></span></h4>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="text-center">
+                    <a href="#!" class="b-b-primary text-primary">View all <i class="ti ti-chevron-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- [ sample-page ] end -->
+</div>
+<script>
+    
+
+
+
+
+
+    var submitingDiv = document.getElementById("submitingDiv")
+    document.getElementById('mainForm').addEventListener('submit', function (formEvent) {
+        formEvent.preventDefault();
+        submitingDiv.innerHTML = `<button class="btn btn-primary" type = "button" disabled >
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                     registring...
+            </button >
+        
+        `
+        var formData = new FormData(formEvent.target);
+
+        var jsonData = {
+            "id": 0,
+            "number": "",
+            "email": "",
+            "password": "",
+            "company_name": "",
+            "owner_name": "",
+            "r_package": 0,
+            "usage_token": "",
+            "merchantUid": "",
+            "apiUserId": "",
+            "apiKey": "",
+            "status": true,
+            "registred_date": "2023-08-16T13:36:53.393Z"
+        };
+        console.log(jsonData)
+        formData.forEach(function (value, key) {
+            jsonData[key] = value;
+        });
+
+        fetch('/api/agent-user/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(jsonData),
+            redirect: 'follow'
+        }).then(function (response) {
+            if (response.status == 201) {
+                // success alert
+
+            }
+            // Handle success response
+            console.log(response);
+        }).catch(function (error) {
+            // Handle error response
+            console.error(error);
+        }).finally(function (response) {
+            submitingDiv.innerHTML = `
+                <button type="submit" class="btn btn-primary">Submit</button>
+                `
+
+        })
+
+
+    })
+</script>
+{% endblock %}

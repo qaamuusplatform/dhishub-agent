@@ -1,0 +1,289 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    .btn-hover:hover {
+        /* Define the hover styles here */
+        /* Example styles */
+        background-color: #AED6F1;
+        color: white;
+    }
+</style>
+<div onload="" class="row">
+    <!-- Large modal -->
+    <!-- Large modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Large
+        modal</button>
+
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                ...
+            </div>
+        </div>
+    </div>
+
+    <!-- Small modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-sm">Small
+        modal</button>
+
+    <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                ...
+            </div>
+        </div>
+    </div>
+
+    <!-- [ sample-page ] start -->
+
+    <div class="col-xl-5 col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row mb-3 align-items-center">
+                    <div class="col">
+                        <small>DHISHUB-PACKAGES</small>
+                        <h4>register new package</h4>
+                    </div>
+                    <div class="col-auto">
+                        <select class="form-select p-r-35">
+                            <option>Today</option>
+                            <option selected>This Month</option>
+                            <option>This Year</option>
+                        </select>
+                    </div>
+                </div>
+                <hr>
+                <form method="post" id="mainForm">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" required placeholder="Enter name">
+                    </div>
+                    <div class="form-group">
+                        <label for="requests_count">Requests Count</label>
+                        <input type="number" class="form-control" id="requests_count" required min="4"
+                            name="requests_count" placeholder="Enter requests count">
+                    </div>
+                    <div class="form-group">
+                        <label for="r_package">Price Per Month</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">$</div>
+                            </div>
+                            <input type="number" name="price_per_month" class="form-control" required
+                                id="price_per_month" placeholder="Price each month">
+                        </div>
+
+                    </div>
+                    <div id="submitingDiv">
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+
+                </form>
+                <div role="alert" aria-live="assertive" aria-atomic="true" class="toast shwo" data-autohide="false">
+                    <div class="toast-header">
+                        <img src="..." class="rounded mr-2" alt="...">
+                        <strong class="mr-auto">Bootstrap</strong>
+                        <small>11 mins ago</small>
+                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="toast-body">
+                        Hello, world! This is a toast message.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-7 col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row mb-0 align-items-center">
+                    <div class="col">
+                        <h4>All Packages</h4>
+                    </div>
+                    <!-- <div class="col-auto"> </div> -->
+                </div>
+                <hr>
+                <table class="table">
+                    <thead style="background-color: black;color: white;">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Package Name</th>
+                            <th scope="col">Request Count</th>
+                            <th scope="col">Price Per Month</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="request_packages">
+
+                    </tbody>
+                </table>
+
+                <!-- <div class="text-center">
+                    <a href="#!" class="b-b-primary text-primary">View all <i class="ti ti-chevron-right"></i></a>
+                </div> -->
+            </div>
+        </div>
+    </div>
+    <!-- [ sample-page ] end -->
+</div>
+<script>
+    var submitingDiv = document.getElementById("submitingDiv")
+    var requests_packages_body = document.getElementById("request_packages")
+    var all_requests_packages = []
+    function ready(callback) {
+        if (document.readyState === 'complete' || document.readyState === 'interactive') {
+            // Document is already ready or in the process of loading
+            callback();
+        } else {
+            document.addEventListener('DOMContentLoaded', callback);
+        }
+    }
+
+    // Usage
+    ready(function () {
+        // Your code to be executed when the document is ready
+        get_requests_packages()
+    });
+    function get_requests_packages() {
+        requests_packages_body.innerHTML = `
+    <tr>
+                            <th scope="row">-</th>
+                            <td>
+                                <div class="" style="background-color: grey;height: 4px;"></div>
+                            </td>
+                            <td>
+                                <div class="" style="background-color: grey;height: 3px;"></div>
+                            </td>
+                            <td>
+                                <div class="" style="background-color: grey;height: 3px;"></div>
+                            </td>
+                            <td>
+                                <div class="" style="background-color: grey;height: 3px;"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">-</th>
+                            <td>
+                                <div class="" style="background-color: grey;height: 4px;"></div>
+                            </td>
+                            <td>
+                                <div class="" style="background-color: grey;height: 3px;"></div>
+                            </td>
+                            <td>
+                                <div class="" style="background-color: grey;height: 3px;"></div>
+                            </td>
+                            <td>
+                                <div class="" style="background-color: grey;height: 3px;"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">-</th>
+                            <td>
+                                <div class="" style="background-color: grey;height: 4px;"></div>
+                            </td>
+                            <td>
+                                <div class="" style="background-color: grey;height: 3px;"></div>
+                            </td>
+                            <td>
+                                <div class="" style="background-color: grey;height: 3px;"></div>
+                            </td>
+                            <td>
+                                <div class="" style="background-color: grey;height: 3px;"></div>
+                            </td>
+                        </tr>
+    `
+
+        fetch('/api/requests-package/', { method: 'GET', })
+            .then(function (response) {
+
+                return response.json();
+            }).then(function (data) {
+                allRequestsPackages = data
+                requests_packages_body.innerHTML = ''
+                for (var request_package of data) {
+                    requests_packages_body.innerHTML += `
+                <tr>
+                    <th scope="row">${request_package.id}</th>
+                    <td>${request_package.name}</td>
+                    <td>${request_package.requests_count}</td>
+                    <td>$ <strong>${request_package.price_per_month}</strong></td>
+                    <td>
+                        <div onclick="edit_requests_package(${request_package.id})" class="btn btn-light btn-sm text-primary btn-hover">
+                            <i class="ti ti-edit"></i>
+                        </div>
+                        <div class="btn btn-light btn-sm text-primary btn-hover">
+                            <i class="ti ti-trash"></i>
+                        </div>
+                        
+                        </td>
+                </tr>
+                `
+                }
+            })
+    }
+
+    function showModalById(modalId) {
+        var modal = document.getElementById(modalId);
+        modal.classList.add('show');
+        modal.style.display = 'block';
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('modal-open');
+    }
+
+
+    function edit_requests_package(id) {
+        showModalById("requestsPackageModal")
+
+    }
+
+    document.getElementById('mainForm').addEventListener('submit', function (formEvent) {
+        formEvent.preventDefault();
+        submitingDiv.innerHTML = `<button class="btn btn-primary" type = "button" disabled >
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                     registring...
+            </button >
+        
+        `
+        var formData = new FormData(formEvent.target);
+
+        var jsonData = {
+            "id": 0,
+            "name": "",
+            "price_per_month": 0.0,
+            "requests_count": 0
+        };
+        formData.forEach(function (value, key) {
+            jsonData[key] = value;
+        });
+        fetch('/api/requests-package/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(jsonData),
+            redirect: 'follow'
+        }).then(function (response) {
+            if (response.status) {
+                // success alert
+            }
+            // Handle success response
+            console.log(response);
+        }).catch(function (error) {
+            // Handle error response
+            console.error(error);
+        }).finally(function (response) {
+            submitingDiv.innerHTML = `
+                        <button type="submit" class="btn btn-primary">Submit</button>
+        `
+
+        })
+
+
+    })
+</script>
+{% endblock %}
