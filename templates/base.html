@@ -1,401 +1,465 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- [Head] start -->
 
 <head>
-    <title> | Berry Bootstrap 5 Admin Template</title>
-    <!-- [Meta] -->
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="description"
-        content="Berry is made using Bootstrap 5 design framework. Download the free admin template & use it for your project." />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <meta name="description" content="Smarthr - Bootstrap Admin Template">
     <meta name="keywords"
-        content="Berry, Dashboard UI Kit, Bootstrap 5, Admin Template, Admin Dashboard, CRM, CMS, Bootstrap Admin Template" />
-    <meta name="author" content="CodedThemes" />
+        content="admin, estimates, bootstrap, business, corporate, creative, management, minimal, modern, accounts, invoice, html5, responsive, CRM, Projects">
+    <meta name="author" content="Dreamguys - Bootstrap Admin Template">
+    <meta name="robots" content="noindex, nofollow">
+    <title>DHIS-HUB AGENT</title>
 
-    <!-- [Favicon] icon -->
-    <link rel="icon" href="{{ url_for('static', path='images/favicon.svg') }}" type="image/x-icon" />
-    <!-- [Google Font] Family -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
-        id="main-font-link" />
-    <!-- [Tabler Icons] https://tablericons.com -->
-    <link rel="stylesheet" href="{{ url_for('static', path='/fonts/tabler-icons.min.css') }}" />
-    <!-- [Material Icons] https://fonts.google.com/icons -->
-    <link rel="stylesheet" href="{{ url_for('static', path='/fonts/material.css') }}" />
-    <!-- [Template CSS Files] -->
-    <link rel="stylesheet" href="{{ url_for('static', path='/css/style.css') }}" id="main-style-link" />
-    <link rel="stylesheet" href="{{ url_for('static', path='/css/style-preset.css') }}" id="preset-style-link" />
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', path='favicon.png') }}">
 
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', path='css/bootstrap.min.css') }}">
+
+    <!-- Fontawesome CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', path='css/font-awesome.min.css') }}">
+
+    <!-- Lineawesome CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', path='css/line-awesome.min.css') }}">
+
+    <!-- Select2 CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', path='css/select2.min.css') }}">
+
+    <!-- Datetimepicker CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', path='css/bootstrap-datetimepicker.min.css') }}">
+
+
+    <link rel="stylesheet" href="{{ url_for('static', path='css/dataTables.bootstrap4.min.css') }}">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', path='css/style.css') }}">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+			<script src="{{ url_for('static', path='js/html5shiv.min.js') }}"></script>
+			<script src="{{ url_for('static', path='js/respond.min.js') }}"></script>
+		<![endif]-->
 </head>
-<!-- [Head] end -->
-<!-- [Body] Start -->
 
 <body>
-    <!-- [ Pre-loader ] start -->
-    <header class="pc-header">
-        <div class="m-header">
-            <a href="index.html" class="b-brand">
-                <!-- ========   change your logo hear   ============ -->
-                <img src="{{ url_for('static', path='/images/logo-dark.svg') }}" alt="" class="logo logo-lg" />
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+
+        <!-- Header -->
+        <div class="header">
+
+            <!-- Logo -->
+            <div class="header-left">
+                <a href="index.html" class="logo">
+                    <img src="assets/img/logo.png" width="40" height="40" alt="">
+                </a>
+            </div>
+            <!-- /Logo -->
+
+            <a id="toggle_btn" href="javascript:void(0);">
+                <span class="bar-icon">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
             </a>
-            <!-- ======= Menu collapse Icon ===== -->
-            <div class="pc-h-item">
-                <a href="#" class="pc-head-link head-link-secondary m-0" id="sidebar-hide">
-                    <i class="ti ti-menu-2"></i>
-                </a>
+
+            <!-- Header Title -->
+            <div class="page-title-box">
+                <h3>DHISHUB-AGENT </h3>
             </div>
-        </div>
-        <div class="header-wrapper"> <!-- [Mobile Media Block] start -->
-            <div class="me-auto pc-mob-drp">
-                <ul class="list-unstyled">
-                    <li class="pc-h-item header-mobile-collapse">
-                        <a href="#" class="pc-head-link head-link-secondary ms-0" id="mobile-collapse">
-                            <i class="ti ti-menu-2"></i>
+            <!-- /Header Title -->
+
+            <a id="mobile_btn" class="mobile_btn" href="#sidebar"><i class="fa fa-bars"></i></a>
+
+            <!-- Header Menu -->
+            <ul class="nav user-menu">
+
+                <!-- Search -->
+                <li class="nav-item">
+                    <div class="top-nav-search">
+                        <a href="javascript:void(0);" class="responsive-search">
+                            <i class="fa fa-search"></i>
                         </a>
-                    </li>
-                    <li class="dropdown pc-h-item d-inline-flex d-md-none">
-                        <a class="pc-head-link head-link-secondary dropdown-toggle arrow-none m-0"
-                            data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false"
-                            aria-expanded="false">
-                            <i class="ti ti-search"></i>
-                        </a>
-                        <div class="dropdown-menu pc-h-dropdown drp-search">
-                            <form class="px-3">
-                                <div class="form-group mb-0 d-flex align-items-center">
-                                    <i class="ti ti-search"></i>
-                                    <input type="search" class="form-control border-0 shadow-none"
-                                        placeholder="Search here..." />
-                                </div>
-                            </form>
-                        </div>
-                    </li>
-                    <li class="pc-h-item d-none d-md-inline-flex">
-                        <form class="header-search">
-                            <i class="ti ti-search icon-search"></i>
-                            <input type="search" class="form-control" placeholder="Search here..." />
-                            <button class="btn btn-light-secondary btn-search"><i
-                                    class="ti ti-adjustments-horizontal"></i></button>
+                        <form action="search.html">
+                            <input class="form-control" type="text" placeholder="Search here">
+                            <button class="btn" type="submit"><i class="fa fa-search"></i></button>
                         </form>
-                    </li>
-                </ul>
-            </div>
-            <!-- [Mobile Media Block end] -->
-            <div class="ms-auto">
-                <ul class="list-unstyled">
-                    <li class="dropdown pc-h-item">
-                        <a class="pc-head-link head-link-secondary dropdown-toggle arrow-none me-0"
-                            data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false"
-                            aria-expanded="false">
-                            <i class="ti ti-bell"></i>
+                    </div>
+                </li>
+                <!-- /Search -->
+
+                <!-- Flag -->
+                <li class="nav-item dropdown has-arrow flag-nav">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">
+                        <img src="assets/img/flags/us.png" alt="" height="20"> <span>English</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a href="javascript:void(0);" class="dropdown-item">
+                            <img src="assets/img/flags/us.png" alt="" height="16"> English
                         </a>
-                        <div class="dropdown-menu dropdown-notification dropdown-menu-end pc-h-dropdown">
-                            <div class="dropdown-header">
-                                <a href="#!" class="link-primary float-end text-decoration-underline">Mark as all
-                                    read</a>
-                                <h5>All Notification <span class="badge bg-warning rounded-pill ms-1">01</span></h5>
-                            </div>
-                            <div class="dropdown-header px-0 text-wrap header-notification-scroll position-relative"
-                                style="max-height: calc(100vh - 215px)">
-                                <div class="list-group list-group-flush w-100">
-                                    <div class="list-group-item">
-                                        <select class="form-select">
-                                            <option value="all">All Notification</option>
-                                            <option value="new">New</option>
-                                            <option value="unread">Unread</option>
-                                            <option value="other">Other</option>
-                                        </select>
-                                    </div>
-                                    <a class="list-group-item list-group-item-action">
-                                        <div class="d-flex">
-                                            <div class="flex-shrink-0">
-                                                <img src="../assets/images/user/avatar-2.jpg" alt="user-image"
-                                                    class="user-avtar" />
-                                            </div>
-                                            <div class="flex-grow-1 ms-1">
-                                                <span class="float-end text-muted">2 min ago</span>
-                                                <h5>John Doe</h5>
-                                                <p class="text-body fs-6">It is a long established fact that a reader
-                                                    will be distracted </p>
-                                                <div class="badge rounded-pill bg-light-danger">Unread</div>
-                                                <div class="badge rounded-pill bg-light-warning">New</div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a class="list-group-item list-group-item-action">
-                                        <div class="d-flex">
-                                            <div class="flex-shrink-0">
-                                                <div class="user-avtar bg-light-success"><i
-                                                        class="ti ti-building-store"></i></div>
-                                            </div>
-                                            <div class="flex-grow-1 ms-1">
-                                                <span class="float-end text-muted">3 min ago</span>
-                                                <h5>Store Verification Done</h5>
-                                                <p class="text-body fs-6">We have successfully received your request.
+                        <a href="javascript:void(0);" class="dropdown-item">
+                            <img src="assets/img/flags/fr.png" alt="" height="16"> French
+                        </a>
+                        <a href="javascript:void(0);" class="dropdown-item">
+                            <img src="assets/img/flags/es.png" alt="" height="16"> Spanish
+                        </a>
+                        <a href="javascript:void(0);" class="dropdown-item">
+                            <img src="assets/img/flags/de.png" alt="" height="16"> German
+                        </a>
+                    </div>
+                </li>
+                <!-- /Flag -->
+
+                <!-- Notifications -->
+                <li class="nav-item dropdown">
+                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                        <i class="fa fa-bell-o"></i> <span class="badge badge-pill">3</span>
+                    </a>
+                    <div class="dropdown-menu notifications">
+                        <div class="topnav-dropdown-header">
+                            <span class="notification-title">Notifications</span>
+                            <a href="javascript:void(0)" class="clear-noti"> Clear All </a>
+                        </div>
+                        <div class="noti-content">
+                            <ul class="notification-list">
+                                <li class="notification-message">
+                                    <a href="activities.html">
+                                        <div class="media">
+                                            <span class="avatar">
+                                                <img alt=""
+                                                    src="{{ url_for('static', path='assets/img/profiles/avatar-02.jpg') }}">
+                                            </span>
+                                            <div class="media-body">
+                                                <p class="noti-details"><span class="noti-title">John Doe</span> added
+                                                    new task <span class="noti-title">Patient appointment booking</span>
                                                 </p>
-                                                <div class="badge rounded-pill bg-light-danger">Unread</div>
+                                                <p class="noti-time"><span class="notification-time">4 mins ago</span>
+                                                </p>
                                             </div>
                                         </div>
                                     </a>
-                                    <a class="list-group-item list-group-item-action">
-                                        <div class="d-flex">
-                                            <div class="flex-shrink-0">
-                                                <div class="user-avtar bg-light-primary"><i class="ti ti-mailbox"></i>
-                                                </div>
-                                            </div>
-                                            <div class="flex-grow-1 ms-1">
-                                                <span class="float-end text-muted">5 min ago</span>
-                                                <h5>Check Your Mail.</h5>
-                                                <p class="text-body fs-6">All done! Now check your inbox as you're in
-                                                    for a sweet treat! </p>
-                                                <button class="btn btn-sm btn-primary">Mail <i
-                                                        class="ti ti-brand-telegram"></i></button>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a class="list-group-item list-group-item-action">
-                                        <div class="d-flex">
-                                            <div class="flex-shrink-0">
-                                                <img src="{{ url_for('static', path='/images/user/avatar-1.jpg') }}" alt="user-image"
-                                                    class="user-avtar" />
-                                            </div>
-                                            <div class="flex-grow-1 ms-1">
-                                                <span class="float-end text-muted">8 min ago</span>
-                                                <h5>John Doe</h5>
-                                                <p class="text-body fs-6">Uploaded two file on &nbsp;<strong>21 Jan
-                                                        2020</strong></p>
-                                                <div class="notification-file d-flex p-3 bg-light-secondary rounded">
-                                                    <i class="ti ti-arrow-bar-to-down"></i>
-                                                    <h5 class="m-0">demo.jpg</h5>
-                                                </div>
+                                </li>
+                                <li class="notification-message">
+                                    <a href="activities.html">
+                                        <div class="media">
+                                            <span class="avatar">
+                                                <img alt="" src="assets/img/profiles/avatar-03.jpg">
+                                            </span>
+                                            <div class="media-body">
+                                                <p class="noti-details"><span class="noti-title">Tarah Shropshire</span>
+                                                    changed the task name <span class="noti-title">Appointment booking
+                                                        with payment gateway</span></p>
+                                                <p class="noti-time"><span class="notification-time">6 mins ago</span>
+                                                </p>
                                             </div>
                                         </div>
                                     </a>
-                                    <a class="list-group-item list-group-item-action">
-                                        <div class="d-flex">
-                                            <div class="flex-shrink-0">
-                                                <img src="{{ url_for('static', path='/images/user/avatar-3.jpg') }}" alt="user-image"
-                                                    class="user-avtar" />
-                                            </div>
-                                            <div class="flex-grow-1 ms-1">
-                                                <span class="float-end text-muted">10 min ago</span>
-                                                <h5>Joseph William</h5>
-                                                <p class="text-body fs-6">It is a long established fact that a reader
-                                                    will be distracted </p>
-                                                <div class="badge rounded-pill bg-light-success">Confirmation of Account
-                                                </div>
+                                </li>
+                                <li class="notification-message">
+                                    <a href="activities.html">
+                                        <div class="media">
+                                            <span class="avatar">
+                                                <img alt="" src="assets/img/profiles/avatar-06.jpg">
+                                            </span>
+                                            <div class="media-body">
+                                                <p class="noti-details"><span class="noti-title">Misty Tison</span>
+                                                    added <span class="noti-title">Domenic Houston</span> and <span
+                                                        class="noti-title">Claire Mapes</span> to project <span
+                                                        class="noti-title">Doctor available module</span></p>
+                                                <p class="noti-time"><span class="notification-time">8 mins ago</span>
+                                                </p>
                                             </div>
                                         </div>
                                     </a>
-                                </div>
-                            </div>
-                            <div class="dropdown-divider"></div>
-                            <div class="text-center py-2">
-                                <a href="#!" class="link-primary">Mark as all read</a>
-                            </div>
+                                </li>
+                                <li class="notification-message">
+                                    <a href="activities.html">
+                                        <div class="media">
+                                            <span class="avatar">
+                                                <img alt="" src="assets/img/profiles/avatar-17.jpg">
+                                            </span>
+                                            <div class="media-body">
+                                                <p class="noti-details"><span class="noti-title">Rolland Webber</span>
+                                                    completed task <span class="noti-title">Patient and Doctor video
+                                                        conferencing</span></p>
+                                                <p class="noti-time"><span class="notification-time">12 mins ago</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="notification-message">
+                                    <a href="activities.html">
+                                        <div class="media">
+                                            <span class="avatar">
+                                                <img alt="" src="assets/img/profiles/avatar-13.jpg">
+                                            </span>
+                                            <div class="media-body">
+                                                <p class="noti-details"><span class="noti-title">Bernardo Galaviz</span>
+                                                    added new task <span class="noti-title">Private chat module</span>
+                                                </p>
+                                                <p class="noti-time"><span class="notification-time">2 days ago</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
-                    </li>
-                    <li class="dropdown pc-h-item header-user-profile">
-                        <a class="pc-head-link head-link-primary dropdown-toggle arrow-none me-0"
-                            data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false"
-                            aria-expanded="false">
-                            <img src="{{ url_for('static', path='/images/user/avatar-2.jpg') }}" alt="user-image" class="user-avtar" />
-                            <span>
-                                <i class="ti ti-settings"></i>
-                            </span>
-                        </a>
-                        <div class="dropdown-menu dropdown-user-profile dropdown-menu-end pc-h-dropdown">
-                            <div class="dropdown-header">
-                                <h4>Good Morning, <span class="small text-muted"> John Doe</span></h4>
-                                <p class="text-muted">Project Admin</p>
-                                <form class="header-search">
-                                    <i class="ti ti-search icon-search"></i>
-                                    <input type="search" class="form-control" placeholder="Search profile options" />
-                                </form>
-                                <hr />
-                                <div class="profile-notification-scroll position-relative"
-                                    style="max-height: calc(100vh - 280px)">
-                                    <div class="upgradeplan-block bg-light-warning rounded">
-                                        <h4>Explore full code</h4>
-                                        <p class="text-muted">Buy now to get full access of code files</p>
-                                        <a href="https://codedthemes.com/item/berry-bootstrap-5-admin-template/"
-                                             class="btn btn-warning">Buy Now</a>
-                                    </div>
-                                    <hr />
-                                    <div class="settings-block bg-light-primary rounded">
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" role="switch"
-                                                id="flexSwitchCheckDefault" />
-                                            <label class="form-check-label" for="flexSwitchCheckDefault">Start DND
-                                                Mode</label>
-                                        </div>
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" role="switch"
-                                                id="flexSwitchCheckChecked" checked />
-                                            <label class="form-check-label" for="flexSwitchCheckChecked">Allow
-                                                Notifications</label>
-                                        </div>
-                                    </div>
-                                    <hr />
-                                    <a href="#" class="dropdown-item">
-                                        <i class="ti ti-settings"></i>
-                                        <span>Account Settings</span>
-                                    </a>
-                                    <a href="#" class="dropdown-item">
-                                        <i class="ti ti-user"></i>
-                                        <span>Social Profile</span>
-                                    </a>
-                                    <a href="../pages/login-v3.html" class="dropdown-item">
-                                        <i class="ti ti-logout"></i>
-                                        <span>Logout</span>
-                                    </a>
-                                </div>
-                            </div>
+                        <div class="topnav-dropdown-footer">
+                            <a href="activities.html">View all Notifications</a>
                         </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </header>
+                    </div>
+                </li>
+                <!-- /Notifications -->
 
-    <nav class="pc-sidebar">
-        <div class="navbar-wrapper">
-            <div class="m-header">
-                <a href="index.html" class="b-brand">
-                    <!-- ========   Change your logo from here   ============ -->
-                    <img src="../assets/images/logo-dark.svg" alt="" class="logo logo-lg" />
-                </a>
-            </div>
-            <div class="navbar-content">
-                <ul class="pc-navbar">
-                    <li class="pc-item pc-caption">
-                        <label>Dashboard</label>
-                        <i class="ti ti-dashboard"></i>
-                    </li>
-                    <li class="pc-item">
-                        <a href="/" class="pc-link"><span class="pc-micon"><i class="ti ti-dashboard"></i></span><span
-                                class="pc-mtext">Dashboard</span></a>
-                    </li>
-                    <li class="pc-item pc-caption">
-                        <label>User Agent</label>
-                        <i class="ti ti-news"></i>
-                    </li>
-                    <li class="pc-item pc-hasmenu">
-                        <a href="#!" class="pc-link"><span class="pc-micon"><i class="ti ti-key"></i></span><span
-                                class="pc-mtext">User Agent</span><span class="pc-arrow"><i
-                                    class="ti ti-chevron-right"></i></span></a>
-                        <ul class="pc-submenu">
-                            <li class="pc-item"><a class="pc-link"  href="/register-agent/">Register
-                                    agent</a></li>
-                            <li class="pc-item"><a class="pc-link"  href="/manage-agents/">Manage
-                                    Users</a></li>
-                        </ul>
-                    </li>
+                <!-- Message Notifications -->
+                <li class="nav-item dropdown">
+                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                        <i class="fa fa-comment-o"></i> <span class="badge badge-pill">8</span>
+                    </a>
+                    <div class="dropdown-menu notifications">
+                        <div class="topnav-dropdown-header">
+                            <span class="notification-title">Messages</span>
+                            <a href="javascript:void(0)" class="clear-noti"> Clear All </a>
+                        </div>
+                        <div class="noti-content">
+                            <ul class="notification-list">
+                                <li class="notification-message">
+                                    <a href="chat.html">
+                                        <div class="list-item">
+                                            <div class="list-left">
+                                                <span class="avatar">
+                                                    <img alt="" src="assets/img/profiles/avatar-09.jpg">
+                                                </span>
+                                            </div>
+                                            <div class="list-body">
+                                                <span class="message-author">Richard Miles </span>
+                                                <span class="message-time">12:28 AM</span>
+                                                <div class="clearfix"></div>
+                                                <span class="message-content">Lorem ipsum dolor sit amet, consectetur
+                                                    adipiscing</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="notification-message">
+                                    <a href="chat.html">
+                                        <div class="list-item">
+                                            <div class="list-left">
+                                                <span class="avatar">
+                                                    <img alt="" src="assets/img/profiles/avatar-02.jpg">
+                                                </span>
+                                            </div>
+                                            <div class="list-body">
+                                                <span class="message-author">John Doe</span>
+                                                <span class="message-time">6 Mar</span>
+                                                <div class="clearfix"></div>
+                                                <span class="message-content">Lorem ipsum dolor sit amet, consectetur
+                                                    adipiscing</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="notification-message">
+                                    <a href="chat.html">
+                                        <div class="list-item">
+                                            <div class="list-left">
+                                                <span class="avatar">
+                                                    <img alt="" src="assets/img/profiles/avatar-03.jpg">
+                                                </span>
+                                            </div>
+                                            <div class="list-body">
+                                                <span class="message-author"> Tarah Shropshire </span>
+                                                <span class="message-time">5 Mar</span>
+                                                <div class="clearfix"></div>
+                                                <span class="message-content">Lorem ipsum dolor sit amet, consectetur
+                                                    adipiscing</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="notification-message">
+                                    <a href="chat.html">
+                                        <div class="list-item">
+                                            <div class="list-left">
+                                                <span class="avatar">
+                                                    <img alt="" src="assets/img/profiles/avatar-05.jpg">
+                                                </span>
+                                            </div>
+                                            <div class="list-body">
+                                                <span class="message-author">Mike Litorus</span>
+                                                <span class="message-time">3 Mar</span>
+                                                <div class="clearfix"></div>
+                                                <span class="message-content">Lorem ipsum dolor sit amet, consectetur
+                                                    adipiscing</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="notification-message">
+                                    <a href="chat.html">
+                                        <div class="list-item">
+                                            <div class="list-left">
+                                                <span class="avatar">
+                                                    <img alt="" src="assets/img/profiles/avatar-08.jpg">
+                                                </span>
+                                            </div>
+                                            <div class="list-body">
+                                                <span class="message-author"> Catherine Manseau </span>
+                                                <span class="message-time">27 Feb</span>
+                                                <div class="clearfix"></div>
+                                                <span class="message-content">Lorem ipsum dolor sit amet, consectetur
+                                                    adipiscing</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="topnav-dropdown-footer">
+                            <a href="chat.html">View all Messages</a>
+                        </div>
+                    </div>
+                </li>
+                <!-- /Message Notifications -->
 
-                    <li class="pc-item pc-caption">
-                        <label>Request Packages</label>
-                        <i class="ti ti-apps"></i>
-                    </li>
-                    <li class="pc-item">
-                        <a href="/manage-packages/" class="pc-link"><span class="pc-micon"><i
-                                    class="ti ti-typography"></i></span><span class="pc-mtext">Manage Packages</span></a>
-                    </li>
-                    <!-- <li class="pc-item">
-                        <a href="../elements/bc_color.html" class="pc-link"><span class="pc-micon"><i
-                                    class="ti ti-brush"></i></span><span class="pc-mtext">Color</span></a>
-                    </li> -->
-                    <!-- <li class="pc-item">
-                        <a href="https://tablericons.com" class="pc-link" ><span class="pc-micon"><i
-                                    class="ti ti-plant-2"></i></span><span class="pc-mtext">Tabler</span><span
-                                class="pc-arrow"></a>
-                    </li> -->
+                <li class="nav-item dropdown has-arrow main-drop">
+                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                        <span class="user-img"><img src="assets/img/profiles/avatar-21.jpg" alt="">
+                            <span class="status online"></span></span>
+                        <span>Admin</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="profile.html">My Profile</a>
+                        <a class="dropdown-item" href="settings.html">Settings</a>
+                        <a class="dropdown-item" href="login.html">Logout</a>
+                    </div>
+                </li>
+            </ul>
+            <!-- /Header Menu -->
 
-                    <li class="pc-item pc-caption">
-                        <label>Exit</label>
-                        <i class="ti ti-brand-chrome"></i>
-                    </li>
-                    <!-- <li class="pc-item"><a href="../other/sample-page.html" class="pc-link"><span class="pc-micon"><i
-                                    class="ti ti-brand-chrome"></i></span><span class="pc-mtext">Sample page</span></a>
-                    </li> -->
-                    <li class="pc-item"><a href="https://codedthemes.gitbook.io/berry-bootstrap/" 
-                            class="pc-link"><span class="pc-micon"><i class="ti ti-logout"></i></span><span
-                                class="pc-mtext">Log-out</span></a></li>
-                </ul>
-                <div class="pc-navbar-card bg-primary rounded">
-                    <h4 class="text-white">Berry Pro</h4>
-                    <p class="text-white opacity-75">Checkout Berry pro features</p>
-                    <a href="https://codedthemes.com/item/berry-bootstrap-5-admin-template/" 
-                        class="btn btn-light text-primary">Pro</a>
+            <!-- Mobile Menu -->
+            <div class="dropdown mobile-user-menu">
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i
+                        class="fa fa-ellipsis-v"></i></a>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="profile.html">My Profile</a>
+                    <a class="dropdown-item" href="settings.html">Settings</a>
+                    <a class="dropdown-item" href="login.html">Logout</a>
                 </div>
             </div>
+            <!-- /Mobile Menu -->
+
         </div>
-    </nav>
-    <div class="loader-bg">
-        <div class="loader-track">
-            <div class="loader-fill"></div>
-        </div>
-    </div>
+        <!-- /Header -->
 
-    
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-inner slimscroll">
+                <div id="sidebar-menu" class="sidebar-menu">
+                    <ul>
+                        <li class="menu-title">
+                            <span>Dashboard</span>
+                        </li>
+                        <li class="submenu">
+                            <a href="/"><i class="la la-dashboard"></i> <span>Dashboard</span></a>
 
-  <div class="pc-container">
-    <div class="pc-content">
-      <!-- [ Main Content ] start -->
-         {% block content %}
+                        </li>
 
-    {% endblock %}
-    </div>
-  </div>
- 
+                        <li class="menu-title">
+                            <span style="font-weight: normal;">User Agent</span>
+                        </li>
+                        <li class="submenu">
+                            <a href="#" class="noti-dot"><i class="la la-user"></i> <span> User Agent</span> <span
+                                    class="menu-arrow"></span></a>
+                            <ul style="display: none;">
+                                <li><a href="/register-agent/">Register
+                                        agent</a></li>
+                                <li><a href="/manage-agents/">Manage
+                                        Users</a></li>
 
-    <!-- [ Pre-loader ] End -->
-    <!-- [ Header Topbar ] start -->
-
-    <!-- [ Header ] end -->
-    <!-- [ Sidebar Menu ] start -->
-    
-    <!-- [ Sidebar Menu ] end -->
-
+                            </ul>
+                        </li>
 
 
-    <!-- [ Main Content ] start -->
+                        <li class="menu-title">
+                            <span style="font-weight: normal;">Request Packages</span>
+                        </li>
+                        <li class="submenu">
+                            <a href="/manage-packages/"><i class="la la-file-pdf-o"></i> <span>Manage
+                                    Packages</span></a>
 
-    <!-- [ Main Content ] end -->
-    <footer class="pc-footer">
-        <div class="footer-wrapper container-fluid">
-            <div class="row">
-                <div class="col my-1">
-                    <p class="m-0">Copyright &copy; <a href="https://codedthemes.com/" >Codedthemes</a>
-                    </p>
-                </div>
-                <div class="col-auto my-1">
-                    <ul class="list-inline footer-link mb-0">
-                        <li class="list-inline-item"><a href="https://codedthemes.com/" >Home</a></li>
-                        <li class="list-inline-item"><a href="https://codedthemes.com/privacy-policy/"
-                                >Privacy
-                                Policy</a></li>
-                        <li class="list-inline-item"><a href="https://codedthemes.com/contact/" >Contact
-                                us</a></li>
+                        </li>
+
+
+
+                        <li class="menu-title">
+                            <span style="font-weight: normal;">exit</span>
+                        </li>
+                        <li>
+                            <a href="/logout/"><i class="la la-object-ungroup"></i> <span>Log-out</span></a>
+                        </li>
+
+
+
+
+
+
+
+
                     </ul>
                 </div>
             </div>
         </div>
-    </footer>
-    <!-- Required Js -->
-    <!-- Required Js -->
-    <script src="{{ url_for('static', path='/js/plugins/popper.min.js') }}"></script>
-    <script src="{{ url_for('static', path='/js/plugins/simplebar.min.js') }}"></script>
-    <script src="{{ url_for('static', path='/js/plugins/bootstrap.min.js') }}"></script>
-    <script src="{{ url_for('static', path='/js/config.js') }}"></script>
-    <script src="{{ url_for('static', path='/js/pcoded.js') }}"></script>
+        <!-- /Sidebar -->
+
+        <!-- Page Wrapper -->
+        <div class="page-wrapper">
+            <div class="content container-fluid">
+
+                <!-- Page Header -->
+                {% block content %}
+
+                {% endblock %}
+                <!-- /Page Header -->
 
 
-    <!-- [Page Specific JS] start -->
-    <!-- Apex Chart -->
-    <script src="{{ url_for('static', path='/js/plugins/apexcharts.min.js') }}"></script>
-    <script src="{{ url_for('static', path='/js/pages/dashboard-default.js') }}"></script>
-    <!-- [Page Specific JS] end -->
+
+            </div>
+        </div>
+        <!-- /Page Wrapper -->
+
+    </div>
+    <!-- /Main Wrapper -->
+
+    <!-- jQuery -->
+    <script src="{{ url_for('static', path='js/jquery-3.5.1.min.js') }}"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <!-- Bootstrap Core JS -->
+    <script src="{{ url_for('static', path='js/popper.min.js') }}"></script>
+    <script src="{{ url_for('static', path='js/bootstrap.min.js') }}"></script>
+
+    <!-- Slimscroll JS -->
+    <script src="{{ url_for('static', path='js/jquery.slimscroll.min.js') }}"></script>
+
+    <!-- Select2 JS -->
+    <script src="{{ url_for('static', path='js/select2.min.js') }}"></script>
+
+    <!-- Datetimepicker JS -->
+    <script src="{{ url_for('static', path='js/moment.min.js') }}"></script>
+    <script src="{{ url_for('static', path='js/bootstrap-datetimepicker.min.js') }}"></script>
+
+
+    <script src="{{ url_for('static', path='js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ url_for('static', path='js/dataTables.bootstrap4.min.js') }}"></script>
+
+    <!-- Custom JS -->
+    <script src="{{ url_for('static', path='js/app.js') }}"></script>
+
 </body>
-<!-- [Body] end -->
 
 </html>

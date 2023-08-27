@@ -1,109 +1,314 @@
 {% extends 'base.html' %}
 {% block content %}
+<div class="modal fade bd-example-modal-lg" id="edit_user_agent" tabindex="-1" role="dialog"
+    aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <!-- <div class="card card-title">
+        </div> -->
+        <div class="modal-content card card-body" id="edit_user_agent_body">
 
-        <div class="card">
-            <div class="card-body">
-                <div class="row mb-0 align-items-center">
-                    <div class="col">
-                        <h4>All Packages</h4>
-                    </div>
-                    <!-- <div class="col-auto"> </div> -->
-                </div>
-                <hr>
-                <table class="table">
-                    <thead style="background-color: black;color: white;">
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Package Name</th>
-                            <th scope="col">Request-Count</th>
-                            <th scope="col">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody id="user_agents_body">
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>
-                                <i class="ti ti-bell"></i>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Larry</td>
-                            <td>the Bird</td>
-                            <td>@twitter</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="text-center">
-                    <a href="#!" class="b-b-primary text-primary">View all <i class="ti ti-chevron-right"></i></a>
-                </div>
-            </div>
         </div>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <div class="row mb-0 align-items-center">
+            <div class="col">
+                <h4>All User Agents</h4>
+            </div>
+            <!-- <div class="col-auto"> </div> -->
+        </div>
+        <hr>
+
+        <div class="table-responsive">
+            <table class="datatable table table-stripped mb-0">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Company Info</th>
+                        <th scope="col">User Info</th>
+                        <th scope="col">R-Package</th>
+                        <th scope="col">Merchant-Info</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Registred Date</th>
+                        <th scope="col">Action</th>
+
+
+
+                    </tr>
+                </thead>
+                <tbody id="user_agents_body">
+
+                </tbody>
+            </table>
+        </div>
+        <!-- <div class="text-center">
+            <a href="#!" class="b-b-primary text-primary">View all <i class="ti ti-chevron-right"></i></a>
+        </div> -->
+    </div>
+</div>
 
 <script>
     var user_agents_body = document.getElementById("user_agents_body")
-    fetch('/api/agent-user/', { method: 'GET', })
-        .then(function (response) {
+    let allUserAgents = []
+    var allRequestsPackages = []
+    var edit_user_agent_body = document.getElementById("edit_user_agent_body")
 
-            return response.json();
-        }).then(function (data) {
-            console.log('dsadas')
-            console.log(data)
-            for (var request_package of data){
-                console.log(request_package)
+    function ready(callback) {
+        if (document.readyState === 'complete' || document.readyState === 'interactive') {
+            // Document is already ready or in the process of loading
+            callback();
+        } else {
+            document.addEventListener('DOMContentLoaded', callback);
+        }
+    }
+    function edit_user_agent_modal(user_agent_id) {
+        user_agent_info = allUserAgents.find(userAgent => userAgent.id === user_agent_id);
+        selected_request_packages = allRequestsPackages.find(requestsPckage => requestsPckage.id === user_agent_info.r_package);
+        console.log(user_agent_info)
+        edit_user_agent_body.innerHTML = ``
+        let htmlData = ``
+        htmlData += `
+        <h5>EDIT USER AGENT</h5>
+        <hr>
+        <form method="post" id="mainForm">
+                    <div class="form-group">
+                        <label for="r_package">Request Package ID</label>
+                        <select class="form-control" id="r_package" required name="r_package">`
+        for (var requestP of allRequestsPackages) {
+            if (requestP.id == selected_request_packages.id) {
+
+            } else {
+                htmlData += `
+            <option selected value="${requestP.id}">${requestP.name} &nbsp;&nbsp;
+                                -${requestP.requests_count}-&nbsp;&nbsp;
+                                $<strong>${requestP.price_per_month}</strong></option>
+                                `
             }
-        })
-    document.getElementById('mainForm').addEventListener('submit', function (formEvent) {
-        formEvent.preventDefault();
-        submitingDiv.innerHTML = `<button class="btn btn-primary" type = "button" disabled >
+
+        }
+        htmlData += `<option selected value="${selected_request_packages.id}">${selected_request_packages.name} &nbsp;&nbsp;
+                                -${selected_request_packages.requests_count}-&nbsp;&nbsp;
+                                $<strong>${selected_request_packages.price_per_month}</strong></option>
+                                `
+
+        htmlData += ` </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email address</label>
+                        <input type="email" class="form-control" value="${user_agent_info.email}" required id="email" name="email"
+                            aria-describedby="emailHelp" placeholder="Enter email">
+
+                    </div>
+                    <div class="form-group">
+                        <label for="r_package">Phone Number</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">252</div>
+                            </div>
+                            <input type="number" name="number" value="${user_agent_info.number}" required class="form-control" id="number"
+                                placeholder="xx  xx xx xx">
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" disabled class="form-control" value="${user_agent_info.password}" required id="password" name="password"
+                            placeholder="Password">
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6">
+                            <label for="company_name">Company Name</label>
+                            <input type="text" class="form-control" required id="company_name" value="${user_agent_info.company_name}" name="company_name"
+                                placeholder="Enter company name">
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="owner_name">Owner Name</label>
+                            <input type="text" class="form-control" value="${user_agent_info.owner_name}" required id="owner_name" name="owner_name"
+                                placeholder="Enter owner name">
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
+                        <div class="col-sm-4">
+                            <label for="merchantUid">Merchant UID</label>
+                            <input type="text" class="form-control" value="${user_agent_info.merchantUid}" required id="merchantUid" name="merchantUid"
+                                placeholder="Enter merchant UID">
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="apiUserId">API User ID</label>
+                            <input type="text" class="form-control" required id="apiUserId" value="${user_agent_info.apiUserId}" name="apiUserId"
+                                placeholder="Enter API user ID">
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="apiKey">API Key</label>
+                            <input type="text" class="form-control" required id="apiKey" value="${user_agent_info.apiKey}" name="apiKey"
+                                placeholder="Enter API key">
+                        </div>
+                    </div>
+                    <br>
+                    <div id="submitingDiv">
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        
+                    </div>
+                </form>
+        
+        `
+        edit_user_agent_body.innerHTML = htmlData
+        $('#edit_user_agent').modal('show');
+        document.getElementById('mainForm').addEventListener('submit', function (formEvent) {
+            formEvent.preventDefault();
+            var submitingDiv = document.getElementById("submitingDiv")
+            submitingDiv.innerHTML = `<button class="btn btn-primary" type = "button" disabled >
             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                     registring...
+                    updating...
             </button >
         
         `
-        var formData = new FormData(formEvent.target);
+            var formData = new FormData(formEvent.target);
 
-        var jsonData = {
-            "id": 0,
-            "name": "",
-            "price_per_month": 0.0,
-            "requests_count": 0
-        };
-        formData.forEach(function (value, key) {
-            jsonData[key] = value;
-        });
-        fetch('/api/requests-package/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(jsonData),
-            redirect: 'follow'
-        }).then(function (response) {
-            if (response.status) {
-                // success alert
-            }
-            // Handle success response
-            console.log(response);
-        }).catch(function (error) {
-            // Handle error response
-            console.error(error);
-        }).finally(function (response) {
-            submitingDiv.innerHTML = `
-                        <button type="submit" class="btn btn-primary">Submit</button>
-        `
+
+            formData.forEach(function (value, key) {
+                user_agent_info[key] = value;
+            });
+
+            fetch(`/api/agent-user/${user_agent_id}/`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(user_agent_info),
+                redirect: 'follow'
+            }).then(function (response) {
+                if (response.status == 201) {
+                    // success alert
+                    get_user_agents() 
+                    swal("User-agent Updatding", "User agent successfully updated!", "success");
+                   
+                    $('#edit_user_agent').modal('hide');
+                }
+                // Handle success response
+                console.log(response);
+            }).catch(function (error) {
+                // Handle error response
+                console.error(error);
+            }).finally(function (response) {
+                submitingDiv.innerHTML = `
+                <button type="submit" class="btn btn-primary">Submit</button>
+                `
+
+            })
+
 
         })
 
 
-    })
+    }
+    ready(function () {
+        // Your code to be executed when the document is ready
+        get_user_agents()
+    });
+    function get_user_agents() {
+        user_agents_body.innerHTML = `
+    <tr>
+                            <th scope="row">-</th>
+                            <td> <div class="" style="background-color: grey;height: 4px;"></div> </td>
+                            <td><div class="" style="background-color: grey;height: 3px;"></div> </td>
+                            <td><div class="" style="background-color: grey;height: 3px;"></div> </td>
+                            <td><div class="" style="background-color: grey;height: 3px;"></div> </td>
+                            <td><div class="" style="background-color: grey;height: 3px;"></div> </td>
+                            <td><div class="" style="background-color: grey;height: 3px;"></div> </td>
+                            <td><div class="" style="background-color: grey;height: 3px;"></div> </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">-</th>
+                            <td> <div class="" style="background-color: grey;height: 4px;"></div> </td>
+                            <td><div class="" style="background-color: grey;height: 3px;"></div> </td>
+                            <td><div class="" style="background-color: grey;height: 3px;"></div> </td>
+                            <td><div class="" style="background-color: grey;height: 3px;"></div> </td>
+                            <td><div class="" style="background-color: grey;height: 3px;"></div> </td>
+                            <td><div class="" style="background-color: grey;height: 3px;"></div> </td>
+                            <td><div class="" style="background-color: grey;height: 3px;"></div> </td>
+                        </tr>
+                        </tr>
+                        <tr>
+                            <th scope="row">-</th>
+                            <td> <div class="" style="background-color: grey;height: 4px;"></div> </td>
+                            <td><div class="" style="background-color: grey;height: 3px;"></div> </td>
+                            <td><div class="" style="background-color: grey;height: 3px;"></div> </td>
+                            <td><div class="" style="background-color: grey;height: 3px;"></div> </td>
+                            <td><div class="" style="background-color: grey;height: 3px;"></div> </td>
+                            <td><div class="" style="background-color: grey;height: 3px;"></div> </td>
+                            <td><div class="" style="background-color: grey;height: 3px;"></div> </td>
+                        </tr>
+                        </tr>
+    `
+
+        fetch('/api/agent-user/', { method: 'GET', })
+            .then(function (response) {
+
+                return response.json();
+            }).then(function (data) {
+                allUserAgents = data
+                user_agents_body.innerHTML = ''
+                for (var user_agent of data) {
+                    user_agents_body.innerHTML += `
+                <tr>
+                    <th scope="row">${user_agent.id}</th>
+                    <td>
+                        <p style="margin-bottom:-3px;font-weight:bold;text-transform:uppercase;">${user_agent.company_name}</p>
+                        ${user_agent.owner_name}
+                    </td>
+                    <td>
+                        <p style="margin-bottom:-3px;font-weight:bold;">${user_agent.email}</p>
+                        ${user_agent.number}
+                    </td>
+                    <td>${user_agent.r_package}</td>
+                    <td>
+                        <p style="margin-bottom:-3px;font-weight:normal;">${user_agent.merchantUid}</p>
+                        ${user_agent.apiUserId}
+                    </td>
+                    <td><strong>${user_agent.status}</strong></td>
+                    <td>${user_agent.registred_date.split('T')[0]}</td>
+                    <td>
+                        <a href='/user-agents-detail/${user_agent.id}/' class="btn btn-info btn-sm  btn-hover">
+                            <i class="la la-eye"></i>
+                        </a>
+                        <div onclick="edit_user_agent_modal(${user_agent.id})" class="btn btn-dark btn-sm  btn-hover">
+                            <i class="la la-edit"></i>
+                        </div>
+                        <div class="btn btn-danger text-white btn-sm btn-hover">
+                            <i class="la la-trash"></i>
+                        </div>
+                        
+                        </td>
+                </tr>
+                `
+                }
+            })
+        fetch('/api/requests-package/', { method: 'GET', })
+            .then(function (response) {
+
+                return response.json();
+            }).then(function (data) {
+                allRequestsPackages = data
+            })
+    }
+
+    // fetch('/api/agent-user/', { method: 'GET', })
+    //     .then(function (response) {
+
+    //         return response.json();
+    //     }).then(function (data) {
+    //         console.log('dsadas')
+    //         console.log(data)
+    //         for (var request_package of data) {
+
+
+    //         }
+    //     })
+
 </script>
 {% endblock %}

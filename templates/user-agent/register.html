@@ -92,7 +92,7 @@
                     <div id="submitingDiv">
 
                         <button type="submit" class="btn btn-primary">Submit</button>
-                        
+
                     </div>
                 </form>
 
@@ -104,24 +104,11 @@
             <div class="card-body">
                 <div class="row mb-3 align-items-center">
                     <div class="col">
-                        <h4>Popular Stocks</h4>
+                        <h4>Users Info</h4>
                     </div>
                     <div class="col-auto"> </div>
                 </div>
-                <div class="rounded bg-light-secondary overflow-hidden mb-3">
-                    <div class="px-3 pt-3">
-                        <div class="row mb-1 align-items-start">
-                            <div class="col">
-                                <h5 class="text-secondary mb-0">Bajaj Finery</h5>
-                                <small class="text-muted">10% Profit</small>
-                            </div>
-                            <div class="col-auto">
-                                <h4 class="mb-0">$1839.00</h4>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="bajajchart"></div>
-                </div>
+                
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item px-0">
                         <div class="row align-items-start">
@@ -242,6 +229,8 @@
         }).then(function (response) {
             if (response.status == 201) {
                 // success alert
+                
+                swal("User Agent", "User agent successfully Created!", "success");
 
             }
             // Handle success response

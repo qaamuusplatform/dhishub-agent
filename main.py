@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Request, Depends, status
+from fastapi import FastAPI, Request, Depends, status,HTTPException
 from fastapi.staticfiles import StaticFiles
 from datetime import datetime, timedelta
 
@@ -40,7 +40,6 @@ def userAgent(db: Session = Depends(get_db)):
 
 @app.post("/api/agent-user", status_code=status.HTTP_201_CREATED, tags=["USER-AGENT"])
 def userAgentCreate(request: schemas.UserAgent, db: Session = Depends(get_db)):
-    print('asd')
     hashed_password = pwd_context.hash(request.password)
     usage_token_generator = generateExpireToken(expire_time=datetime.now()+timedelta(days=90), number=request.number)
     
@@ -62,6 +61,18 @@ def userAgentCreate(request: schemas.UserAgent, db: Session = Depends(get_db)):
     db.refresh(new_user)
     return new_user
 
+@app.put("/api/agent-user/{id}", status_code=status.HTTP_201_CREATED, tags=["USER-AGENT"])
+def userAgentUpdate(id,request: schemas.UserAgent, db: Session = Depends(get_db)):
+    print(id)
+    user_agent=db.query(models.UserAgent).filter(models.UserAgent.id==id)
+    if not user_agent.first():
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail=f'User with id {id} not found')
+    user_agent.update(request.dict())
+    db.commit()
+
+    return request
+
+
 
 # REQUESTS-PACKAGES API
 @app.get("/api/requests-package", tags=["REQUESTS-PACKAGE"])
@@ -81,6 +92,18 @@ def requestsPackageCreate(request: schemas.RequestPackage, db: Session = Depends
     db.commit()
     db.refresh(new_package)
     return new_package
+
+@app.put("/api/requests-package/{id}",status_code=status.HTTP_201_CREATED, tags=["REQUESTS-PACKAGE"])
+def requestsPackageUpdate(id,request:schemas.RequestPackage,db:Session=Depends(get_db)):
+    requests_package=db.query(models.RequestPackage).filter(models.RequestPackage.id==id)
+    print('printed')
+    print(requests_package)
+    if not requests_package.first():
+        print('there is not first')
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail=f'Request-Package with id {id} not found')
+    requests_package.update(request.dict())
+    db.commit()
+    return request
 
 
 # PIPE APIs
@@ -204,10 +227,20 @@ def registerAgent(request: Request, db: Session = Depends(get_db)):
 
 @app.get("/manage-agents/", tags=["HTML-TEMPLATES"])
 def manageAgents(request: Request):
-    print(generateExpireToken('252616981411', datetime(
-        year=2023, month=12, day=15, hour=16, minute=50)))
+    # print(generateExpireToken('252616981411', datetime(
+    #     year=2023, month=12, day=15, hour=16, minute=50)))
     return templates.TemplateResponse("/user-agent/list.html",
                                       {"request": request})
+
+@app.get("/user-agents-detail/{id}/", tags=["HTML-TEMPLATES"])
+def agentDetail(id,request: Request,db: Session = Depends(get_db)):
+    user_agent=db.query(models.UserAgent).filter(models.UserAgent.id==id).first()
+    selected_requests_package = db.query(models.RequestPackage).filter(models.RequestPackage.id==user_agent.r_package).first()
+    requests_usage=db.query(models.RequestUsage).filter(models.RequestUsage.id==id)
+    # print(requests_packages)
+    return templates.TemplateResponse("/user-agent/detail.html",
+                                      {"requests_usage":requests_usage,"user_agent":user_agent,"selected_requests_package": selected_requests_package,"request": request})
+
 
 
 @app.get("/manage-packages/", tags=["HTML-TEMPLATES"])
